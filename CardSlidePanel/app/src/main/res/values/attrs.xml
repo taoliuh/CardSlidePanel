@@ -3,5 +3,11 @@
     <declare-styleable name="card">
         <attr name="bottomMarginTop" format="dimension" />
         <attr name="yOffsetStep" format="dimension" />
+        <attr name="cyclic" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="DrawShadowFrameLayout">
+        <attr name="shadowDrawable" format="reference" />
+        <attr name="shadowVisible" format="boolean" />
     </declare-styleable>
 </resources>

@@ -2,24 +2,21 @@ package com.stone.card;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 import android.util.AttributeSet;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.FrameLayout;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 /**
  * 卡片View项
  * @author xmuSistone
  */
-@SuppressLint("NewApi")
-public class CardItemView extends LinearLayout {
+public class CardItemView extends FrameLayout {
 
-    private ImageView imageView;
-    private TextView userNameTv;
-    private TextView imageNumTv;
-    private TextView likeNumTv;
+    private SimpleDraweeView imageView;
+    private View shadeView;
 
     public CardItemView(Context context) {
         this(context, null);
@@ -32,16 +29,16 @@ public class CardItemView extends LinearLayout {
     public CardItemView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         inflate(context, R.layout.card_item, this);
-        imageView = (ImageView) findViewById(R.id.card_image_view);
-        userNameTv = (TextView) findViewById(R.id.card_user_name);
-        imageNumTv = (TextView) findViewById(R.id.card_pic_num);
-        likeNumTv = (TextView) findViewById(R.id.card_like);
+        imageView = (SimpleDraweeView) findViewById(R.id.card_image_view);
+        shadeView = findViewById(R.id.shade);
     }
 
     public void fillData(CardDataItem itemData) {
-        ImageLoader.getInstance().displayImage(itemData.imagePath, imageView);
-        userNameTv.setText(itemData.userName);
-        imageNumTv.setText(itemData.imageNum + "");
-        likeNumTv.setText(itemData.likeNum + "");
+        imageView.setImageURI(Uri.parse(itemData.imagePath));
     }
+
+    public void setShadeLayer(int shaderLayer) {
+        shadeView.setBackgroundResource(shaderLayer);
+    }
+
 }
